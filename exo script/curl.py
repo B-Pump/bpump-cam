@@ -4,7 +4,7 @@ import numpy as np
 import time
 import PoseModule as pm
 
-cap = cv2.VideoCapture("assets/walk.mp4")
+cap = cv2.VideoCapture("assets/curl.mp4")
 detector = pm.poseDetector()
 pTime = 0
 
@@ -21,7 +21,7 @@ while True:
     sucess, img = cap.read()
 
     if sucess:
-        img = detector.findPose(img, True)
+        img = detector.findPose(img, False)
         img = cv2.resize(img, (1024, 576)) #img = cv2.resize(img, (1280, 720))
         lmList = detector.findPosition(img, False)
         # print(lmList)
@@ -29,26 +29,24 @@ while True:
         if len(lmList) != 0:
             # Left side
             angleLeftArm = detector.findAngle(img, 12, 14, 16)
-            angleLeftHip = detector.findAngle(img, 12, 24, 26)
-            angleLeftLeg = detector.findAngle(img, 24, 26, 28)
-            angleLeftFoot = detector.findAngle(img, 26, 28, 32)
+            angleLeftUpperLeg = detector.findAngle(img, 12, 24, 26)
+            angleLeftLowerLeg = detector.findAngle(img, 24, 26, 28)
 
             # Right side
             angleRightArm = detector.findAngle(img, 11, 13, 15)
-            angleRightHip = detector.findAngle(img, 11, 23, 25)
-            angleRightLeg = detector.findAngle(img, 23, 25, 27)
-            angleRightFoot = detector.findAngle(img, 25, 27, 31)
+            angleRightUpperLeg = detector.findAngle(img, 11, 23, 25)
+            angleRightLowerLeg = detector.findAngle(img, 23, 25, 27)
 
-            percentageLeftHip = calculate_progress(angleRightHip, 50, 160)
-            percentageRightHip = calculate_progress(angleRightHip, 50, 160)
+            percentageLeft = calculate_progress(angleLeftArm, 70, 160)
+            percentageRight = calculate_progress(angleLeftArm, 70, 160)
 
-            if percentageLeftHip == 100 and percentageRightHip == 100 and curlDrop == True:
+            if percentageLeft == 100 and percentageRight == 100 and curlDrop == True:
                 curlDone += 1
                 curlDrop = False
-            elif percentageLeftHip == 0 and percentageRightHip == 0:
+            elif percentageLeft == 0 and percentageRight == 0:
                 curlDrop = True
 
-            print(f"{percentageLeftHip}% et {percentageRightHip}% | Pull up: {curlDone}")
+            print(f"{percentageLeft}% et {percentageRight}% | Pull up: {curlDone}")
 
         cTime = time.time()
         fps = 1 / (cTime - pTime)

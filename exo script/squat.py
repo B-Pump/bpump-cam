@@ -4,12 +4,12 @@ import numpy as np
 import time
 import PoseModule as pm
 
-cap = cv2.VideoCapture("assets/walk.mp4")
+cap = cv2.VideoCapture("assets/squat.mp4")
 detector = pm.poseDetector()
 pTime = 0
 
-curlDone = 0
-curlDrop = False
+squatlDone = 0
+squatDrop = False
 
 def calculate_progress(angle, angleMin, angleMax):
     angle = max(angleMin, min(angle, angleMax))
@@ -21,7 +21,7 @@ while True:
     sucess, img = cap.read()
 
     if sucess:
-        img = detector.findPose(img, True)
+        img = detector.findPose(img, False)
         img = cv2.resize(img, (1024, 576)) #img = cv2.resize(img, (1280, 720))
         lmList = detector.findPosition(img, False)
         # print(lmList)
@@ -42,19 +42,19 @@ while True:
             percentageLeftHip = calculate_progress(angleRightHip, 50, 160)
             percentageRightHip = calculate_progress(angleRightHip, 50, 160)
 
-            if percentageLeftHip == 100 and percentageRightHip == 100 and curlDrop == True:
-                curlDone += 1
-                curlDrop = False
+            if percentageLeftHip == 100 and percentageRightHip == 100 and squatDrop == True:
+                squatlDone += 1
+                squatDrop = False
             elif percentageLeftHip == 0 and percentageRightHip == 0:
-                curlDrop = True
+                squatDrop = True
 
-            print(f"{percentageLeftHip}% et {percentageRightHip}% | Pull up: {curlDone}")
+            print(f"{percentageLeftHip}% et {percentageRightHip}% | Pull up: {squatlDone}")
 
         cTime = time.time()
         fps = 1 / (cTime - pTime)
         pTime = cTime
         cv2.putText(img, str(int(fps)) + " fps", (50, 50), cv2.FONT_HERSHEY_PLAIN, 2, (255, 255, 255), 2)
-        cv2.putText(img, f"Curl: {curlDone}", (800, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (0,0,0), 2)
+        cv2.putText(img, f"Squat: {squatlDone}", (800, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (0,0,0), 2)
         cv2.imshow("B-PUMP", img)
         cv2.waitKey(1)
     else:
