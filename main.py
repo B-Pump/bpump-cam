@@ -8,10 +8,14 @@ cap = cv2.VideoCapture("assets/pull-up.mp4")
 detector = pm.poseDetector()
 pTime = 0
 
+pullDone = 0
+pullDrop = False
+
 def calculate_progress(angle, angle_min, angle_max):
     angle = max(angle_max, min(angle, angle_min))
     progression = round(((angle - angle_min) / (angle_max - angle_min)) * 100)
     return progression
+
 
 while True:
     sucess, img = cap.read()
@@ -33,8 +37,17 @@ while True:
             angle = detector.findAngle(img, 11, 23, 25)
             angle = detector.findAngle(img, 23, 25, 27)
 
-            percentage = calculate_progress(angleLeftArm, 150, 45)
-            print(f"{percentage}%")
+            percentage = calculate_progress(angleLeftArm, 150, 48)
+
+            if percentage == 100 and pullDrop == True:
+                pullDone += 1
+                pullDrop = False
+            elif percentage == 0:
+                pullDrop = True
+            
+            print(f"{percentage}% | Pull up: {pullDone}")
+
+            
 
         cTime = time.time()
         fps = 1 / (cTime - pTime)
