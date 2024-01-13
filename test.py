@@ -4,7 +4,7 @@ exercices = Exercices()
 
 response = str(input(f"""{"="*100}
     Quelles exercice veux-tu faire ?
-        1 - Pull up 
+        1 - Tractions
 {"="*100}
 
     Réponse: """))
