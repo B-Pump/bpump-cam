@@ -45,6 +45,8 @@ while True:
             elif percentage == 0:
                 pullDrop = True
             
+            
+
             print(f"{percentage}% | Pull up: {pullDone}")
 
             
@@ -53,7 +55,7 @@ while True:
         fps = 1 / (cTime - pTime)
         pTime = cTime
         cv2.putText(img, str(int(fps)) + " fps", (50, 50), cv2.FONT_HERSHEY_PLAIN, 2, (255, 255, 255), 2)
-
+        cv2.putText(img, f"Pull up: {pullDone}", (800, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (0,0,0), 2)
         cv2.imshow("B-PUMP", img)
         cv2.waitKey(1)
     else:
