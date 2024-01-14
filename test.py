@@ -22,4 +22,4 @@ elif response == "3":
 elif response == "4":
     exercices.start("situp", 5)
 elif response == "5":
-    exercices.start("squat", 5)
+    exercices.start("squat", 4)
