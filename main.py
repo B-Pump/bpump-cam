@@ -20,7 +20,8 @@ class Exercices:
         invert = data.fetchInvert(workout)
         title = data.fetchSugar(workout)
         # cap = cv2.VideoCapture(0)
-        cap = cv2.VideoCapture("assets/squat.mp4")  # cv2.VideoCapture(0) #<- Pour utilisé la camera
+        file = "assets/" + workout + ".mp4"
+        cap = cv2.VideoCapture(file)
         detector = pm.poseDetector()
         pTime = 0
         self.reps = 0
