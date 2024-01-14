@@ -1,4 +1,4 @@
-from Exo import Exercices
+from main import Exercices
 exercices = Exercices()
 
 
@@ -10,4 +10,4 @@ response = str(input(f"""{"="*100}
     Réponse: """))
 
 if response == "1":
-    exercices.start("pullup")
+    exercices.start("squat")

@@ -1,6 +1,9 @@
 {
   "workouts": {
     "pullup": {
+      "sugar": {
+        "title": "Traction"
+      },
       "left": {
         "angle": "angleLeftArm",
         "minAngle": 150,
@@ -13,6 +16,9 @@
       }
     },
     "curl": {
+      "sugar": {
+        "title": "Curl"
+      },
       "left": {
         "angle": "angleLeftArm",
         "minAngle": 70,
@@ -23,18 +29,52 @@
         "minAngle": 70,
         "maxAngle": 160
       }
-    }
-  },
-  "pushup": {
-    "left": {
-      "angle": "angleLeftArm",
-      "minAngle": 75,
-      "maxAngle": 165
     },
-    "right": {
-      "angle": "angleLeftArm",
-      "minAngle": 75,
-      "maxAngle": 165
+    "pushup": {
+      "sugar": {
+        "title": "Pompe"
+      },
+      "left": {
+        "angle": "angleLeftArm",
+        "minAngle": 75,
+        "maxAngle": 165
+      },
+      "right": {
+        "angle": "angleLeftArm",
+        "minAngle": 75,
+        "maxAngle": 165
+      }
+    },
+    "situp": {
+      "sugar": {
+        "title": "Abdo"
+      },
+      "left": {
+        "angle": "angleLeftUpperLeg",
+        "minAngle": 80,
+        "maxAngle": 125
+      },
+      "right": {
+        "angle": "angleRightUpperLeg",
+        "minAngle": 80,
+        "maxAngle": 125
+      }
+    },
+    "squat": {
+      "sugar": {
+        "title": "Squat",
+        "invertReward": 1
+      },
+      "left": {
+        "angle": "angleRightHip",
+        "minAngle": 48,
+        "maxAngle": 160
+      },
+      "right": {
+        "angle": "angleRightHip",
+        "minAngle": 48,
+        "maxAngle": 160
+      }
     }
   }
 }

@@ -1,6 +1,4 @@
 class PoseType:
-    def __init__(self, angles, legangles):
-        self.angleLeftArm, self.angleLeftUpperLeg, self.angleLowerLeg, \
-            self.angleRightArm, self.angleRightUpperLeg, self.angleRightLowerLeg = angles
-        (self.angleLeftArm, self.angleLeftHip, self.angleLeftLeg, self.angleLeftFoot,
-         self.angleRightArm, self.angleRightHip, self.angleRightLeg, self.angleRightFoot) = legangles
+    def __init__(self, joint_names, angles):
+        for name, angle in zip(joint_names, angles):
+            setattr(self, name, angle)

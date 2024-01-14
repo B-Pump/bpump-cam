@@ -2,7 +2,28 @@ import json
 
 with open("./data/workouts.json", "r") as read_file:
     data = json.load(read_file)
-    print(data['workouts'])
+
+
+def fetchSugar(exercice):
+    parsed = data['workouts'][exercice]
+    return parsed['sugar']['title']
+
+
+def fetchInvert(exercice):
+    parsed = data['workouts'][exercice]
+    if 'invertReward' not in parsed['sugar']:
+        return False
+    return True
+
+
+def fetchAngles(exercice):
+    parsed = data['workouts'][exercice]
+    angles = []
+    for attribute in parsed:
+        if 'angle' in parsed[attribute]:
+            angles.append(parsed[attribute]['angle'])
+    print(angles)
+    return angles
 
 
 def lookup(exercice, pose):
@@ -13,6 +34,8 @@ def lookup(exercice, pose):
     :return: Un array avec le lookup nécéssaire de chaque côté
     """
     parsed = data['workouts'][exercice]
+    if parsed == None:
+        raise FileNotFoundError
     return [
         [
             getattr(pose, parsed['left']['angle']),
