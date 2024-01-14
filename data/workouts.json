@@ -1,0 +1,40 @@
+{
+  "workouts": {
+    "pullup": {
+      "left": {
+        "angle": "angleLeftArm",
+        "minAngle": 150,
+        "maxAngle": 48
+      },
+      "right": {
+        "angle": "angleRightArm",
+        "minAngle": 150,
+        "maxAngle": 48
+      }
+    },
+    "curl": {
+      "left": {
+        "angle": "angleLeftArm",
+        "minAngle": 70,
+        "maxAngle": 160
+      },
+      "right": {
+        "angle": "angleRightArm",
+        "minAngle": 70,
+        "maxAngle": 160
+      }
+    }
+  },
+  "pushup": {
+    "left": {
+      "angle": "angleLeftArm",
+      "minAngle": 75,
+      "maxAngle": 165
+    },
+    "right": {
+      "angle": "angleLeftArm",
+      "minAngle": 75,
+      "maxAngle": 165
+    }
+  }
+}

@@ -1,7 +1,7 @@
 import cv2
 import sys
 import time
-import PoseModule as pm
+import poseModule as pm
 
 cap = cv2.VideoCapture("assets/squat.mp4")
 detector = pm.poseDetector()
