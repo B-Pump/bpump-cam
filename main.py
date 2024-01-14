@@ -6,21 +6,18 @@ from internals.poseType import PoseType
 import internals.expectations as data
 
 
-def calculate_progress(angle, angle_min, angle_max):
-    angle = max(angle_max, min(angle, angle_min))
-    progression = round(((angle - angle_min) / (angle_max - angle_min)) * 102)
-    return progression
+
 
 
 class Exercices:
     def __init__(self):
         self.pull_Up_Done = 0
 
-    def start(self, workout):
+    def start(self, workout, reps):
         invert = data.fetchInvert(workout)
         title = data.fetchSugar(workout)
         # cap = cv2.VideoCapture(0)
-        cap = cv2.VideoCapture("assets/squat.mp4")  # cv2.VideoCapture(0) #<- Pour utilisé la camera
+        cap = cv2.VideoCapture(f"assets/{workout}.mp4")  # cv2.VideoCapture(0) #<- Pour utilisé la camera
         detector = pm.poseDetector()
         pTime = 0
         self.reps = 0
@@ -31,12 +28,17 @@ class Exercices:
             # TODO ils retourneraint une fonction lambda qui permettrait de calculer la progression.
             def calculate_progress(angle, angleMin, angleMax):
                 angle = max(angleMin, min(angle, angleMax))
-                progression = round(((angle - angleMax) / (angleMin - angleMax)) * 100)
+                progression = round(((angle - angleMax) / (angleMin - angleMax)) * 105)
                 return progression
-        while True:
-            sucess, img = cap.read()
+        else:
+            def calculate_progress(angle, angle_min, angle_max):
+                angle = max(angle_max, min(angle, angle_min))
+                progression = round(((angle - angle_min) / (angle_max - angle_min)) * 100)
+                return progression
+        while self.reps < reps:
+            success, img = cap.read()
 
-            if sucess:
+            if success:
                 img = detector.findPose(img, False)
                 img = cv2.resize(img, (1024, 576))  # img = cv2.resize(img, (1280, 720))
                 lmList = detector.findPosition(img, False)
@@ -44,7 +46,6 @@ class Exercices:
                     pose = self.poseHandler(img, detector, neededAngles)
                     expectations = data.lookup(workout, pose)
                     percentage = calculate_progress(*expectations[0])
-
                     if percentage >= 100 and repDrop == True:  # On ajoute une tolérance aussi..
                         self.reps += 1
                         repDrop = False
@@ -55,14 +56,14 @@ class Exercices:
                 cTime = time.time()
                 fps = 1 / (cTime - pTime)
                 pTime = cTime
-                cv2.putText(img, str(int(fps)) + " fps", (50, 50), cv2.FONT_HERSHEY_PLAIN, 2, (255, 255, 255), 1)
+                cv2.putText(img, str(int(fps)), (50, 50), cv2.FONT_HERSHEY_PLAIN, 2, (255, 0, 255), 2)
                 cv2.putText(img, f"{title}: {self.reps} reps", (800, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 0), 1)
                 cv2.imshow("B-PUMP", img)
                 cv2.waitKey(1)
             else:
                 cap.release()
                 cv2.destroyAllWindows()
-                sys.exit()
+        return reps
 
     def poseHandler(self, img, detector, joint_names):
         joint_indices = {

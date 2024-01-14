@@ -10,4 +10,5 @@ response = str(input(f"""{"="*100}
     Réponse: """))
 
 if response == "1":
-    exercices.start("squat")
+    print(exercices.start("squat", 3))
+    print(exercices.start("pullup", 2))
