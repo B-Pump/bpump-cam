@@ -14,12 +14,12 @@ response = str(input(f"""{"="*100}
     Réponse: """))
 
 if response == "1":
-    exercices.start("pullup", 3)
+    exercices.start("pullup", 5)
 elif response == "2": 
-    exercices.start("curl", 3)
+    exercices.start("curl", 5)
 elif response == "3":
-    exercices.start("pushup", 3)
+    exercices.start("pushup", 5)
 elif response == "4":
-    exercices.start("situp", 3)
+    exercices.start("situp", 5)
 elif response == "5":
-    exercices.start("squat", 3)
+    exercices.start("squat", 5)
