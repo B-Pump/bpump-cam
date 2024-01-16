@@ -5,6 +5,17 @@ import math
 class poseDetector() :
     
     def __init__(self, mode=False, complexity=1, smooth_landmarks=True, enable_segmentation=False, smooth_segmentation=True, detectionCon=0.5, trackCon=0.5):
+        """
+        Initialisation de la classe avec des paramètres spécifiques pour la configuration du modèle et la détection
+
+        :param mode: Mode de détection du modèle pose (par défaut sur False)
+        :param complexity: Niveau de complexité du modèle pose (par défaut à 1)
+        :param smooth_landmarks: Activation ou désactivation du lissage des landmarks (par défaut sur True)
+        :param enable_segmentation: Activation ou désactivation de la segmentation (par défaut sur False)
+        :param smooth_segmentation: Activation ou désactivation du lissage de la segmentation (par défaut sur True)
+        :param detectionCon: Seuil de confiance pour la détection (par défaut à 0.5)
+        :param trackCon: Seuil de confiance pour le suivi (par défaut à 0.5)
+        """
         self.mode = mode 
         self.complexity = complexity
         self.smooth_landmarks = smooth_landmarks
@@ -17,6 +28,13 @@ class poseDetector() :
         self.pose = self.mpPose.Pose(self.mode, self.complexity, self.smooth_landmarks, self.enable_segmentation, self.smooth_segmentation, self.detectionCon, self.trackCon)
         
     def findPose(self, img, draw=True):
+        """
+        Utilise le modèle pose pour détecter la pose dans une image
+
+        :param img: L'image dans laquelle détecter la pose
+        :param draw: Booléen indiquant si les landmarks et les connexions doivent être dessinés sur l'image (par défaut sur True)
+        :return: L'image avec les landmarks et les connexions dessinés
+        """
         imgRGB = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
         self.results = self.pose.process(imgRGB)
         if self.results.pose_landmarks:
@@ -26,6 +44,13 @@ class poseDetector() :
         return img
     
     def findPosition(self, img, draw=True):
+        """
+        Extrait et renvoie la liste des positions des landmarks détectés
+
+        :param img: L'image à partir de laquelle extraire les positions des landmarks
+        :param draw: Booléen indiquant si les landmarks doivent être dessinés sur l'image (par défaut sur True)
+        :return: Une liste contenant les positions des landmarks
+        """
         self.lmList = []
         if self.results.pose_landmarks:
             for id, lm in enumerate(self.results.pose_landmarks.landmark):
@@ -37,7 +62,15 @@ class poseDetector() :
 
         return self.lmList
         
-    def findAngle(self, img, p1, p2, p3, draw=True):   
+    def findAngle(self, img, p1, p2, p3, draw=True):
+        """
+        Calcule l'angle formé par trois points spécifiés
+
+        :param img: L'image sur laquelle dessiner l'angle
+        :param p1, p2, p3: Indices des landmarks pour calculer l'angle (https://lc.cx/PLZ6m7)
+        :param draw: Booléen indiquant si l'angle doit être dessiné sur l'image (par défaut sur True)
+        :return: L'angle calculé en degrés
+        """
         x1, y1 = self.lmList[p1][1:]
         x2, y2 = self.lmList[p2][1:]
         x3, y3 = self.lmList[p3][1:]
