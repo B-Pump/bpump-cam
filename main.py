@@ -21,7 +21,7 @@ class Exercices:
         """
         invert = data.fetchInvert(workout)
         title = data.fetchSugar(workout)
-        cap = cv2.VideoCapture(f"assets/{workout}.mp4")  # VideoCapture(0) pour utiliser la caméra en direct
+        cap = cv2.VideoCapture(f"assets/{workout}.mp4") # VideoCapture(0) pour utiliser la caméra en direct
         detector = pm.poseDetector()
         pTime = 0
         self.reps = 0
@@ -64,14 +64,13 @@ class Exercices:
                         repDrop = False
                     elif percentage == 0:
                         repDrop = True
-                    # print(repDrop, percentage)
-                    # print(f"{percentage}% | Pull up: {self.reps}")
+                    print(f"{percentage}% | Répétition : {self.reps}")
                         
                 cTime = time.time()
                 fps = 1 / (cTime - pTime)
                 pTime = cTime
                 cv2.putText(img, str(int(fps)), (50, 50), cv2.FONT_HERSHEY_PLAIN, 2, (255, 0, 255), 2)
-                cv2.putText(img, f"{title}: {self.reps} reps", (800, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 0), 1)
+                cv2.putText(img, f"{title}: {self.reps}", (800, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 0), 1)
                 cv2.imshow("B-PUMP", img)
                 cv2.waitKey(1)
             else:

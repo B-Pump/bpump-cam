@@ -18,7 +18,7 @@ def fetchInvert(exercice):
     Vérifie si l'exercice à l'attribut invertReward associée au sugar
 
     :param exercice: Le nom de l'exercice
-    :return: True si une l'attribut est présent, sinon False.
+    :return: True si une l'attribut est présent, sinon False
     """
     parsed = data['workouts'][exercice]
     if 'invertReward' not in parsed['sugar']:
@@ -37,7 +37,7 @@ def fetchAngles(exercice):
     for attribute in parsed:
         if 'angle' in parsed[attribute]:
             angles.append(parsed[attribute]['angle'])
-    print(angles)
+    # print(angles)
     return angles
 
 def lookup(exercice, pose):
@@ -62,5 +62,4 @@ def lookup(exercice, pose):
             parsed['right']['minAngle'],
             parsed['right']['maxAngle']
         ]
-
     ]

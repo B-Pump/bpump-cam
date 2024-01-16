@@ -40,7 +40,7 @@
                 "maxAngle": 165
             },
             "right": {
-                "angle": "angleLeftArm",
+                "angle": "angleRightArm",
                 "minAngle": 75,
                 "maxAngle": 165
             }
@@ -66,12 +66,12 @@
                 "invertReward": 1
             },
             "left": {
-                "angle": "angleRightHip",
+                "angle": "angleLeftHip",
                 "minAngle": 48,
                 "maxAngle": 160
             },
             "right": {
-                "angle": "angleRightHip",
+                "angle": "angleLeftHip",
                 "minAngle": 48,
                 "maxAngle": 160
             }
