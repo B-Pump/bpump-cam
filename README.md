@@ -1,5 +1,7 @@
 # bpump-cam
 
+Documentation only in French for the moment !
+
 Calculateur d'angles pour le projet B-Pump, coach robotique 100% connecté !
 
 Ce programme utilise les bibliothèques [Mediapipe](https://pypi.org/project/mediapipe/) et [OpenCV](https://pypi.org/project/opencv-python/) pour calculer les angles entre les liaisons du corps, offrant ainsi une solution robuste pour vérifier la précision des mouvements. L'objectif est d'assurer que l'utilisateur effectue correctement les exercices en mesurant les angles formés par différentes parties du corps.
