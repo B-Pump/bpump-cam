@@ -2,16 +2,7 @@ from main import Exercices
 
 exercices = Exercices()
 
-reponse = str(input(f"""{"="*100}
-    Quelles exercice veux-tu faire ?
-        1 - Pullup
-        2 - curl
-        3 - pushup
-        4 - situp
-        5 - squat
-{"="*100}
-
-    Réponse: """))
+reponse = input("\nQuelles exercice veux-tu faire ?\n1 - Pullup\n2 - curl\n3 - pushup\n4 - situp\n5 - squat\n\nRéponse: ")
 
 if reponse == "1":
     exercices.start("pullup", 10)
