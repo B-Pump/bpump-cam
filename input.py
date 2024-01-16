@@ -2,15 +2,20 @@ from main import Exercices
 
 exercices = Exercices()
 
-reponse = input("\nQuelles exercice veux-tu faire ?\n1 - Pullup\n2 - curl\n3 - pushup\n4 - situp\n5 - squat\n\nRéponse: ")
+user_input = input("Quel exercice veux-tu faire et combien de répétitions ?\n1 - Tractions\n2 - Curls\n3 - Pompes\n4 - Sit-up\n5 - Squats\n\nFormat : <exo> <reps>\n\nRéponse : ")
 
-if reponse == "1":
-    exercices.start("pullup", 10)
-elif reponse == "2": 
-    exercices.start("curl", 10)
-elif reponse == "3":
-    exercices.start("pushup", 10)
-elif reponse == "4":
-    exercices.start("situp", 10)
-elif reponse == "5":
-    exercices.start("squat", 10)
+user_input_list = user_input.split()
+if len(user_input_list) == 2:
+    exo, reps = user_input_list
+    reps = int(reps)
+
+    if exo == "1":
+        exercices.start("pullup", reps)
+    elif exo == "2":
+        exercices.start("curl", reps)
+    elif exo == "3":
+        exercices.start("pushup", reps)
+    elif exo == "4":
+        exercices.start("situp", reps)
+    elif exo == "5":
+        exercices.start("squat", reps)
