@@ -50,12 +50,12 @@
                 "title": "Abdos"
             },
             "left": {
-                "angle": "angleLeftUpperLeg",
+                "angle": "angleRightHip",
                 "minAngle": 80,
                 "maxAngle": 125
             },
             "right": {
-                "angle": "angleRightUpperLeg",
+                "angle": "angleRightHip",
                 "minAngle": 80,
                 "maxAngle": 125
             }
