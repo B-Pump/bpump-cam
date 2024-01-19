@@ -9,7 +9,7 @@ class Exercices:
         """
         Initialisation de la classe
         """
-        self.pull_Up_Done = 0
+        pass
 
     def start(self, workout, reps):
         """
