@@ -2,10 +2,10 @@ class PoseType:
     
     def __init__(self, joint_names, angles):
         """
-        Méthode d'initialisation de la classe
+        Class initialization method
 
-        :param joint_names: Une liste de noms de jointures
-        :param angles: Une liste d'angles correspondants aux jointures
+        :param joint_names: A list of join names
+        :param angles: A list of angles corresponding to the joins
         """
         for name, angle in zip(joint_names, angles):
             setattr(self, name, angle)

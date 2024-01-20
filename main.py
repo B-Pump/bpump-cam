@@ -7,30 +7,30 @@ import internals.expectations as data
 class Exercices:
     def __init__(self):
         """
-        Initialisation de la classe
+        Class initialization
         """
         pass
 
     def start(self, workout, reps):
         """
-        Démarrer l'exercice spécifié
+        Start the specified exercise
 
-        :param workout: Le nom de l'exercice
-        :param reps: Le nombre de répétitions à effectuer
-        :return: Le nombre de répétitions effectuées
+        :param workout: The name of the exercise
+        :param reps: The number of repetitions to perform
+        :return: The number of repetitions performed
         """
         invert = data.fetchInvert(workout)
         title = data.fetchSugar(workout)
-        cap = cv2.VideoCapture(f"assets/{workout}.mp4") # VideoCapture(0) pour utiliser la caméra en direct
+        cap = cv2.VideoCapture(f"assets/{workout}.mp4") # VideoCapture(0) to use the live camera
         detector = pm.poseDetector()
         pTime = 0
         self.reps = 0
         repDrop = False
         neededAngles = data.fetchAngles(workout)
 
-        if invert:  # On inverse le système de comptage de rep selon que ce soit par exemple un squat ou une traction
-            # TODO Faire plus que deux types de reward system et les refactoriser sur leur propre fichier
-            # TODO ils retourneraint une fonction lambda qui permettrait de calculer la progression
+        if invert:  # We reverse the rep counting system depending on whether it is for example a squat or a pull-up
+            # TODO Make more than two types of reward system and refactor them on their own file
+            # TODO they would return a lambda function which would calculate the progression
             def calculate_progress(angle, angleMin, angleMax):
                 """
                 ...
@@ -59,7 +59,7 @@ class Exercices:
                     pose = self.poseHandler(img, detector, neededAngles)
                     expectations = data.lookup(workout, pose)
                     percentage = calculate_progress(*expectations[0])
-                    if percentage >= 100 and repDrop == True:  # On ajoute une tolérance aussi...
+                    if percentage >= 100 and repDrop == True:  # We also add a tolerance...
                         self.reps += 1
                         repDrop = False
                     elif percentage == 0:
@@ -81,12 +81,12 @@ class Exercices:
 
     def poseHandler(self, img, detector, joint_names):
         """
-        Manipule la pose détectée et renvoie un objet PoseType
+        Manipulates the detected pose and returns a PoseType object
 
-        :param img: L'image d'entrée
-        :param detector: Le type de détecteur
-        :param joint_names: Le liste des articulations
-        :return: L'objet PoseType représentant la pose détectée
+        :param img: The input image
+        :param detector: The type of detector
+        :param joint_names: The list of joints
+        :return: The PoseType object representing the detected pose
         """
         joint_indices = {
             "angleLeftArm": (12, 14, 16),
